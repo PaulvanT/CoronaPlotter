@@ -11,7 +11,7 @@ Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-dat
 
 Possible fit types:
 
-| FITTYPE               | DESCRIPTION                      |
+| `fitType`             | Description                      |
 | --------------------- |:--------------------------------:|
 | `'poly1'`             | Linear polynomial curve          |
 | `'poly2'`             | Quadratic polynomial curve       |
