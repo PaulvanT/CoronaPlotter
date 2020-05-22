@@ -1,4 +1,4 @@
-# Corona
+# CoronaPlotter
 
 Simple MATLAB function for plotting the amount of Corona cases and deaths of any country in the world over time with curve fitting possibility.
 
