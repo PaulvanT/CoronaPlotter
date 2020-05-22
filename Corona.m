@@ -1,6 +1,8 @@
 function Corona(start_date, end_date, country, fitType)
 
 % Run example: Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'poly3')
+%
+% Use 'help fit' in the Command Window to see fitType possibilities
 
     % Dissecting data
     opts = detectImportOptions('download.csv'); % Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
