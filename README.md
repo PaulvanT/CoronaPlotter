@@ -13,3 +13,10 @@ poly1'              Linear polynomial curve
 'linearinterp'      Piecewise linear interpolation
 'cubicinterp'       Piecewise cubic interpolation
 'smoothingspline'   Smoothing spline (curve)
+
+
+| FITTYPE       | DESCRIPTION   |
+| ------------- |:-------------:|
+| col 3 is      | right-aligned |
+| col 2 is      | centered      |
+| zebra stripes | are neat      |
