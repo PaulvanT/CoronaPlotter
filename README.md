@@ -1,6 +1,6 @@
 # Corona
 
-Simple MATLAB function for plotting the amount of Corona cases and deaths over time with curve fitting possibility.
+Simple MATLAB function for plotting the amount of Corona cases and deaths of any country in the world over time with curve fitting possibility.
 
 Format of the function: `Corona(start_date, end_date, country, fitType)`
 
