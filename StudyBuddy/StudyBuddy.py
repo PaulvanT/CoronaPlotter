@@ -6,7 +6,7 @@ from playsound import playsound
 print("\n################################################################")
 print(  "##################### NEW STUDY SESSION ########################")
 print(  "################################################################")
-print("\n(Please change the width of the Terminal window to 145 or larger)\n")
+print("\n")
 print("\n######################### SETUP ################################\n")
 minutes = float(input("How many minutes do you want to allow per page?: "))
 page = int(input("At what page will you start studying?:\t\t "))
