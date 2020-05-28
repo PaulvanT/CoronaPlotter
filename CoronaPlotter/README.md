@@ -4,6 +4,8 @@ Simple MATLAB function for plotting the amount of Corona cases and deaths of any
 
 Format of the function: `Corona(start_date, end_date, country, plotStyle, fitType)`
 
+Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide (Make sure to use the csv format and to name it `download.csv`)
+
 ### Cumulative
 ##### cumul
 Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'cumul')` (The fitType can be omitted).
@@ -34,6 +36,3 @@ Possible fit types:
 | `'cubicinterp'`       | Piecewise cubic interpolation    |
 | `'smoothingspline'`   | Smoothing spline (curve)         |
 
-
-
-Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide (Make sure to use the csv format and to name it `download.csv`)
