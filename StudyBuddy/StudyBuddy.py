@@ -33,6 +33,7 @@ def update_progress(progress, elapsed_time):
 def pause_handler():
     global paused
     while True:
+        time.sleep(0.5)
         if keyboard.is_pressed('s'):
             paused = True
             input("\n \nPaused, press enter to continue ")
@@ -59,7 +60,7 @@ def studyclock(minutes_per_page, page_started, goal):
             start += pauze_duration
             elapsed = time.time() - start
             update_progress(elapsed/seconds, elapsed)
-            time.sleep(0.1)
+            time.sleep(0.5)
         current_page += 1
         playsound('Pingsound.mp3')
         if current_page != goal:

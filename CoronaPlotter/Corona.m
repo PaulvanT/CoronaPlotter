@@ -9,8 +9,13 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
     % Dissecting data
     opts = detectImportOptions('download.csv'); % Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
     T = readtable('download.csv', opts);
-    country_rows = strcmp(T.countriesAndTerritories, country);
-    T = T(country_rows, :);
+    if contains(country, 'World')
+        % TO DO
+    else
+        country_rows = strcmp(T.countriesAndTerritories, country);
+        T = T(country_rows, :);
+    end
+    
     
     if contains(plotStyle, 'daily')
         
@@ -38,16 +43,16 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         hold on
         plot(dates , fitcases, 'linewidth', 3);
         xlabel('Date')
-        ylabel('Confirmed cases')
-        legend('ECDC data', 'Fitted curve')
+        ylabel('Confirmed new cases')
+        legend('Daily ECDC data', 'Fitted curve')
 
         nexttile;
         plot(dates, deaths, '+-', 'linewidth', 2);
         hold on
         plot(dates, fitdeaths, 'linewidth', 3);
         xlabel('Date')
-        ylabel('Confirmed deaths')
-        legend('ECDC data', 'Fitted curve')
+        ylabel('Confirmed new deaths')
+        legend('Daily ECDC data', 'Fitted curve')
     
     elseif contains(plotStyle, 'cumul')
         
