@@ -1,4 +1,4 @@
-
+# coding: utf-8
 import time, sys, keyboard, threading
 from playsound import playsound
 
@@ -26,7 +26,7 @@ def update_progress(progress, elapsed_time):
         progress = 0
         status = "error: progress var must be float\r\n"
     block = int(round(barLength*progress))
-    text = "\rPROGRESS: {0} {1}% {2} {3} {4} {5}".format( "▍"*block + "-"*(barLength-block), int(progress*100), status, "Elapsed time: ", int(elapsed_time), "seconds")
+    text = '\rPROGRESS: {0} {1}% {2} {3} {4} {5}'.format('▎'*block + '-'*(barLength-block), int(progress*100), status, 'Elapsed time: ', int(elapsed_time), 'seconds')
     sys.stdout.write(text)
     sys.stdout.flush()
 
@@ -62,7 +62,7 @@ def studyclock(minutes_per_page, page_started, goal):
             update_progress(elapsed/seconds, elapsed)
             time.sleep(0.5)
         current_page += 1
-        playsound('Pingsound.mp3')
+        playsound('Bell_sound.mp3')
         if current_page != goal:
             for i in range(0,5):
                 print(".")
