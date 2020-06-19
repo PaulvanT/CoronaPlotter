@@ -6,9 +6,14 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
 %
 % Use 'help fit' in the Command Window to see fitType possibilities
 
+    % Fetching the newest data from the 'European Centre for Disease
+    % Prevention and Control' website
+    url = 'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv';
+    websave('ecdpc_data.csv', url);
+
     % Dissecting data
-    opts = detectImportOptions('download.csv'); % Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
-    T = readtable('download.csv', opts);
+    opts = detectImportOptions('ecdpc_data.csv');
+    T = readtable('ecdpc_data.csv', opts);
     if contains(country, 'World')
         % TO DO
     else
@@ -44,7 +49,7 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         plot(dates , fitcases, 'linewidth', 3);
         xlabel('Date')
         ylabel('Confirmed new cases')
-        legend('Daily ECDC data', 'Fitted curve')
+        legend('Daily ECDPC data', 'Fitted curve')
 
         nexttile;
         plot(dates, deaths, '+-', 'linewidth', 2);
@@ -52,7 +57,7 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         plot(dates, fitdeaths, 'linewidth', 3);
         xlabel('Date')
         ylabel('Confirmed new deaths')
-        legend('Daily ECDC data', 'Fitted curve')
+        legend('Daily ECDPC data', 'Fitted curve')
     
     elseif contains(plotStyle, 'cumul')
         
@@ -92,14 +97,14 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             semilogy(dates , cumulcases, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed cases')
-            legend('Cumulative ECDC data')
+            legend('Cumulative ECDPC data')
             grid on
 
             nexttile;
             semilogy(dates, cumuldeaths, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed deaths')
-            legend('Cumulative ECDC data')
+            legend('Cumulative ECDPC data')
             grid on
 
         else
@@ -111,13 +116,13 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             plot(dates , cumulcases, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed cases')
-            legend('Cumulative ECDC data')
+            legend('Cumulative ECDPC data')
 
             nexttile;
             plot(dates, cumuldeaths, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed deaths')
-            legend('Cumulative ECDC data')
+            legend('Cumulative ECDPC data')
             
         end
         
