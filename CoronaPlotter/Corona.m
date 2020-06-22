@@ -9,7 +9,9 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
     % Fetching the newest data from the 'European Centre for Disease
     % Prevention and Control' website
     url = 'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv';
-    websave('ecdpc_data.csv', url);
+    options = weboptions;
+    options.Timeout = 10;
+    websave('ecdpc_data.csv', url, options);
 
     % Dissecting data
     opts = detectImportOptions('ecdpc_data.csv');
