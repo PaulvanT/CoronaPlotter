@@ -1,10 +1,23 @@
-function Corona(start_date, end_date, country, plotStyle, fitType)
-
-% Run examples: 
-%               Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily', 'poly3')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Run examples %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Daily numbers without curve fitting:
+%               Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')
+%
+% Daily numbers with curve fitting:
+%               Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'dailyfit', 'poly3')
+%
+% Cumulative numbers, normal plot:
+%               Corona('01-Mar-2020 00:00:00', '25-May-2020 00:00:00', 'Belgium', 'cumul')
+%
+% Cumulative numbers, log plot:
 %               Corona('01-Mar-2020 00:00:00', '25-May-2020 00:00:00', 'Belgium', 'logcumul')
 %
+%
 % Use 'help fit' in the Command Window to see fitType possibilities
+
+function Corona(start_date, end_date, country, plotStyle, fitType)
 
     % Fetching the newest data from the 'European Centre for Disease
     % Prevention and Control' website
@@ -34,32 +47,53 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         dates = flip(table2array(T(:, 1)));
         cases = flip(table2array(T(:, 5)));
         deaths = flip(table2array(T(:, 6)));
+        
+        if contains(plotStyle, 'fit')
+            
+            % Curve fitting
+            x = linspace(0, length(dates), length(dates))';
+            fitcases = feval(fit(x, cases, fitType), x);
+            fitdeaths = feval(fit(x, deaths, fitType), x);
 
-        % Curve fitting
-        x = linspace(0, length(dates), length(dates))';
-        fitcases = feval(fit(x, cases, fitType), x);
-        fitdeaths = feval(fit(x, deaths, fitType), x);
 
+            % Plot
+            figure('Name','COVID-19','NumberTitle','off');
+            tiledlayout(2,1);
 
-        % Plot
-        figure('Name','COVID-19','NumberTitle','off');
-        tiledlayout(2,1);
+            nexttile;
+            plot(dates , cases, '+-', 'linewidth', 2);
+            hold on
+            plot(dates , fitcases, 'linewidth', 3);
+            xlabel('Date')
+            ylabel('Confirmed new cases')
+            legend('Daily ECDPC data', 'Fitted curve')
 
-        nexttile;
-        plot(dates , cases, '+-', 'linewidth', 2);
-        hold on
-        plot(dates , fitcases, 'linewidth', 3);
-        xlabel('Date')
-        ylabel('Confirmed new cases')
-        legend('Daily ECDPC data', 'Fitted curve')
+            nexttile;
+            plot(dates, deaths, '+-', 'linewidth', 2);
+            hold on
+            plot(dates, fitdeaths, 'linewidth', 3);
+            xlabel('Date')
+            ylabel('Confirmed new deaths')
+            legend('Daily ECDPC data', 'Fitted curve')
+            
+        else
+            % Plot
+            figure('Name','COVID-19','NumberTitle','off');
+            tiledlayout(2,1);
 
-        nexttile;
-        plot(dates, deaths, '+-', 'linewidth', 2);
-        hold on
-        plot(dates, fitdeaths, 'linewidth', 3);
-        xlabel('Date')
-        ylabel('Confirmed new deaths')
-        legend('Daily ECDPC data', 'Fitted curve')
+            nexttile;
+            plot(dates , cases, '+-', 'linewidth', 2);
+            xlabel('Date')
+            ylabel('Confirmed new cases')
+            legend('Daily ECDPC data')
+
+            nexttile;
+            plot(dates, deaths, '+-', 'linewidth', 2);
+            xlabel('Date')
+            ylabel('Confirmed new deaths')
+            legend('Daily ECDPC data')
+            
+        end
     
     elseif contains(plotStyle, 'cumul')
         
