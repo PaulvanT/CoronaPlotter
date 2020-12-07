@@ -39,4 +39,5 @@ Possible fit types:
 
 ##### without curve fitting
 Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')
+
 This command will plot the raw data of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
