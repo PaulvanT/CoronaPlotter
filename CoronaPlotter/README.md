@@ -38,6 +38,6 @@ Possible fit types:
 | `'smoothingspline'`   | Smoothing spline (curve)         |
 
 ##### without curve fitting
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')`
+Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')` (The fitType can be omitted).
 
 This command will plot the raw data of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
