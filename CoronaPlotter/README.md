@@ -4,6 +4,7 @@ Simple MATLAB function for plotting the amount of Corona cases and deaths of any
 
 Format of the function: `Corona(start_date, end_date, country, plotStyle, fitType)`
 
+Every time you run the function, the most recent data from the European Centre for Disease Prevention and Control is downloaded. 
 Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 
 ### Cumulative
@@ -19,9 +20,10 @@ This command will plot the cumulative data in a semilog plot.
 
 
 ### Not cumulative
+##### with curve fitting
+Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'dailyfit', 'smoothingspline')`
 
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily', 'poly3')`
-This command will plot the raw data, as well as a cubic polynomial curve fitted to the data, of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
+This command will plot the raw data, as well as a smoothing spline fitted to the data, of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
 
 Possible fit types:
 
@@ -36,3 +38,7 @@ Possible fit types:
 | `'cubicinterp'`       | Piecewise cubic interpolation    |
 | `'smoothingspline'`   | Smoothing spline (curve)         |
 
+##### without curve fitting
+Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')` (The fitType can be omitted).
+
+This command will plot the raw data of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
