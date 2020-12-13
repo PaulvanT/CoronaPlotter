@@ -4,7 +4,7 @@ Simple MATLAB function for plotting the amount of Corona cases and deaths of any
 
 Format of the function: `Corona(start_date, end_date, country, plotStyle, fitType)`
 
-Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
+Every time you run the function, the most recent data from the European Centre for Disease Prevention and Control is downloaded. Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 
 ### Cumulative
 ##### cumul
