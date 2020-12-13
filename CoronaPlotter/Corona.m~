@@ -51,14 +51,10 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         if contains(plotStyle, 'fit')
             
             % Curve fitting
-            n = length(dates)/3;
-            interpolation_points = round(linspace(1, length(dates), n))';
-            case_values = cases(interpolation_points);
-            death_values = deaths(interpolation_points);
-            fitted_casecurve = fit(interpolation_points, case_values, fitType);
-            fitted_deathcurve = fit(interpolation_points, death_values, fitType);
-            
-            x = linspace(1, length(dates), length(dates))';
+            n = length(dates);
+            x = linspace(0, length(dates)-1, n)';
+            fitted_casecurve = fit(x, cases, fitType);
+            fitted_deathcurve = fit(x, deaths, fitType);
             fitcases = feval(fitted_casecurve, x);
             fitdeaths = feval(fitted_deathcurve, x);
 
@@ -68,23 +64,21 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             tiledlayout(2,1);
 
             nexttile;
-            plot(dates , cases, '+-', 'linewidth', 1);
+            plot(dates , cases, '+-', 'linewidth', 2);
             hold on
             plot(dates , fitcases, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed new cases')
             grid on
-            grid minor
             legend('Daily ECDPC data', 'Fitted curve')
 
             nexttile;
-            plot(dates, deaths, '+-', 'linewidth', 1);
+            plot(dates, deaths, '+-', 'linewidth', 2);
             hold on
             plot(dates, fitdeaths, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed new deaths')
             grid on
-            grid minor
             legend('Daily ECDPC data', 'Fitted curve')
             
         else
@@ -97,7 +91,6 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             xlabel('Date')
             ylabel('Confirmed new cases')
             grid on
-            grid minor
             legend('Daily ECDPC data')
 
             nexttile;
@@ -105,7 +98,6 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             xlabel('Date')
             ylabel('Confirmed new deaths')
             grid on
-            grid minor
             legend('Daily ECDPC data')
             
         end
@@ -168,15 +160,12 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
             xlabel('Date')
             ylabel('Confirmed cases')
             grid on
-            grid minor
             legend('Cumulative ECDPC data')
 
             nexttile;
             plot(dates, cumuldeaths, 'linewidth', 3);
             xlabel('Date')
             ylabel('Confirmed deaths')
-            grid on
-            grid minor
             legend('Cumulative ECDPC data')
             
         end
