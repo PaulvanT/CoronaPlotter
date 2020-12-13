@@ -23,7 +23,7 @@ This command will plot the cumulative data in a semilog plot.
 ##### with curve fitting
 Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'dailyfit', 'smoothingspline')`
 
-This command will plot the raw data, as well as a cubic polynomial curve fitted to the data, of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
+This command will plot the raw data, as well as a smoothing spline fitted to the data, of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
 
 Possible fit types:
 
