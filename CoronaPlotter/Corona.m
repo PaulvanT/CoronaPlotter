@@ -45,8 +45,8 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         T = T(end_date_rows, :);
 
         dates = flip(table2array(T(:, 1)));
-        cases = flip(table2array(T(:, 5)));
-        deaths = flip(table2array(T(:, 6)));
+        cases = flip(table2array(T(:, 3)));
+        deaths = flip(table2array(T(:, 4)));
         
         % Apply filter on data to smooth it out
         n = length(dates);
@@ -128,9 +128,9 @@ function Corona(start_date, end_date, country, plotStyle, fitType)
         
         end_date_rows = (T.dateRep <= end_date);
         T = T(end_date_rows, :);
-        cases = flip(table2array(T(:, 5)));
+        cases = flip(table2array(T(:, 3)));
         cases(1) = 1;
-        deaths = flip(table2array(T(:, 6)));
+        deaths = flip(table2array(T(:, 4)));
         deaths(1) = 1;
         
         start_date_rows = (T.dateRep >= start_date);
