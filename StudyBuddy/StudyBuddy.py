@@ -64,7 +64,7 @@ def studyclock(minutes_per_page, page_started, goal):
         current_page += 1
         playsound('Bell_sound.mp3')
         if current_page != goal:
-            for i in range(0,5):
+            for _ in range(0,5):
                 print(".")
                 time.sleep(1)
             print("\n==> You should be at page ", current_page, "now.\n")
