@@ -19,19 +19,24 @@ function [dates, cases, deaths, cumulcases, cumuldeaths] = ...
     
     % Per capita option
     if contains(option, 'per capita')
-        population = flip(table2array(T(1, 8)));
+        population = unique(flip(table2array(T(:, 8))));
         cases = cases/population;
         deaths = deaths/population;
     end
     
     % Cumulative data
-    cumulcases = ones(length(cases), 1);
-    cumuldeaths = ones(length(deaths), 1);
-    cumulcases(1) = cases(1);
+    cumulcases = zeros(length(cases), 1);
+    if ~isempty(cases)
+        cumulcases(1) = cases(1);
+    end
     for i = 2:length(cases)
         cumulcases(i) = cumulcases(i-1) + cases(i);
     end
-    cumuldeaths(1) = deaths(1);
+    
+    cumuldeaths = zeros(length(deaths), 1);
+    if ~isempty(cases)
+        cumuldeaths(1) = deaths(1);
+    end
     for i = 2:length(deaths)
         cumuldeaths(i) = cumuldeaths(i-1) + deaths(i);
     end

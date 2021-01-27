@@ -23,10 +23,35 @@ function compare(start_date, end_date, countries, option)
     for i = 1:n
         [~, casestemp, deathstemp, cumulcasestemp, cumuldeathstemp] = ...
             fetch_data(T,start_date, end_date, countries(i), option);
-        cases(:, i) = casestemp;
-        deaths(:, i) = deathstemp;
-        cumulcases(:, i) = cumulcasestemp;
-        cumuldeaths(:, i) = cumuldeathstemp;
+        
+        
+        if size(casestemp) == size(cases(:,i))
+            cases(:, i) = casestemp;
+        else
+            cases(:, i) = zeros(m,1);
+            countries(i)
+        end
+        
+        if size(deathstemp) == size(deaths(:,i))
+            deaths(:, i) = deathstemp;
+        else
+            deaths(:, i) = zeros(m,1);
+            countries(i)
+        end
+        
+        if size(cumulcasestemp) == size(cumulcases(:,i))
+            cumulcases(:, i) = cumulcasestemp;
+        else
+            cumulcases(:, i) = zeros(m,1);
+            countries(i)
+        end
+        
+        if size(cumuldeathstemp) == size(cumuldeaths(:,i))
+            cumuldeaths(:, i) = cumuldeathstemp;
+        else
+            cumuldeaths(:, i) = zeros(m,1);
+            countries(i)
+        end
     end
     
     % Format country names containinng underscores
