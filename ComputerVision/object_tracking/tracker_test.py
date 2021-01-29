@@ -18,9 +18,12 @@ y_distance_data = []
 # Read the first frame
 _, frame = cap.read()
 
-# Get the size of the frame to center the plot later
-x_size = frame.shape[1]/2
-y_size = frame.shape[0]/2
+# Resizing parameters of frame
+scale_percent = 30 # percent of original size ==> HUGE INFLUENCE ON SPEED
+width = int(frame.shape[1]* scale_percent / 100)
+height = int(frame.shape[0] * scale_percent / 100)
+dim = (width, height)
+
 
 while True:
 
@@ -28,6 +31,8 @@ while True:
     if not isinstance(frame, np.ndarray):
         if frame == None:
             break
+    # Resize image
+    frame = cv2.resize(frame, dim, interpolation = cv2.INTER_AREA)
 
     # Track circular objects on frame
     frame, delta_x, delta_y = obj_trck.object_tracker(frame)
@@ -46,8 +51,8 @@ while True:
     _, frame = cap.read()
 
 # Plot the distance data
-plt.xlim(-x_size, x_size)
-plt.ylim(-y_size, y_size)
+plt.xlim(-width/2, width/2)
+plt.ylim(-height/2, height/2)
 plt.scatter(x_distance_data, y_distance_data)
 plt.grid()
 plt.show()
