@@ -1,44 +1,10 @@
 # CoronaPlotter
 
-Simple MATLAB function for plotting the amount of Corona cases and deaths of any country in the world over time with curve fitting possibility.
+Simple MATLAB function for plotting the amount of Corona (cumulative) cases and deaths of any country in the world over time.
 
-Format of the function: `Corona(start_date, end_date, country, plotStyle, fitType)`
+Format of the function: `corona_plot('01-Jul-2020 00:00:00', '30-Jan-2021 00:00:00', ["Belgium", "Germany", "Netherlands", "France", "Sweden", "United_States_of_America", "United_Kingdom"], 'per capita')`
 
 Every time you run the function, the most recent data from the European Centre for Disease Prevention and Control is downloaded. 
 Data source: https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 
-### Cumulative
-##### cumul
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'cumul')` (The fitType can be omitted).
 
-This command will plot the cumulative data.
-
-##### logcumul
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'logcumul')` (The fitType can be omitted).
-
-This command will plot the cumulative data in a semilog plot.
-
-
-### Not cumulative
-##### with curve fitting
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'dailyfit', 'smoothingspline')`
-
-This command will plot the raw data, as well as a smoothing spline fitted to the data, of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
-
-Possible fit types:
-
-| `fitType`             | Description                      |
-| --------------------- |:--------------------------------:|
-| `'poly1'`             | Linear polynomial curve          |
-| `'poly2'`             | Quadratic polynomial curve       |
-| `'poly3'`             | Cubic polynomial curve           |
-| `'poly4'`             | 4th order polynomial curve       |
-| `'poly5'`             | 5th order polynomial curve       |
-| `'linearinterp'`      | Piecewise linear interpolation   |
-| `'cubicinterp'`       | Piecewise cubic interpolation    |
-| `'smoothingspline'`   | Smoothing spline (curve)         |
-
-##### without curve fitting
-Run example: `Corona('01-Mar-2020 00:00:00', '22-May-2020 00:00:00', 'Belgium', 'daily')` (The fitType can be omitted).
-
-This command will plot the raw data of all the deaths and cases in Belgium between March 1st 2020 and May 22nd 2020.
