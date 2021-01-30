@@ -1,4 +1,4 @@
-function compare(start_date, end_date, countries, option)
+function corona_plot(start_date, end_date, countries, option)
 
     % Fetching the newest data from the 'European Centre for Disease
     % Prevention and Control' website
@@ -24,7 +24,7 @@ function compare(start_date, end_date, countries, option)
         [~, casestemp, deathstemp, cumulcasestemp, cumuldeathstemp] = ...
             fetch_data(T,start_date, end_date, countries(i), option);
         
-        
+        % Add zeroes for missing data
         if size(casestemp) == size(cases(:,i))
             cases(:, i) = casestemp;
         else
