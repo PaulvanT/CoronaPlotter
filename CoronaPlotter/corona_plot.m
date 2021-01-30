@@ -1,5 +1,5 @@
 function corona_plot(start_date, end_date, countries, option)
-
+    
     % Fetching the newest data from the 'European Centre for Disease
     % Prevention and Control' website
     url = 'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv';
@@ -8,6 +8,10 @@ function corona_plot(start_date, end_date, countries, option)
     websave('ecdpc_data.csv', url, options);
     opts = detectImportOptions('ecdpc_data.csv');
     T = readtable('ecdpc_data.csv', opts);
+    
+    if nargin < 4
+        option = "None";
+    end
     
     % Get the dates
     [dates, ~, ~, ~, ~] = ...
