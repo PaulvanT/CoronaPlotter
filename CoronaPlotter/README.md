@@ -14,9 +14,9 @@ Format of the function: `corona_plot(start_date, end_date, countries, option)`
 #### Per capita
 `corona_plot('01-Jul-2020 00:00:00', '30-Jan-2021 00:00:00', ["Belgium", "Germany", "Netherlands", "France", "Sweden", "United_States_of_America", "United_Kingdom"], 'per capita')`
 
-![test](example.png)
+![per_capita](images/per_capita.png)
 
 #### Absolute
 `corona_plot('01-Jul-2020 00:00:00', '30-Jan-2021 00:00:00', ["Belgium", "Germany", "Netherlands", "France", "Sweden", "United_States_of_America", "United_Kingdom"])`
 
-
+![absolute](images/absolute.png)
