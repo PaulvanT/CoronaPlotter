@@ -33,18 +33,21 @@ def object_tracker(frame):
         # Draw circle and center of circle
         x,y,r = circle
         cv2.circle(frame, (x, y), r, (0, 255, 0), 4)
-        cv2.rectangle(frame, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
+        cv2.rectangle(frame, (x - 5, y - 5), (x + 5, y + 5), (0, 255, 0), -1)
 
-        # Draw line from center of the frame to center of the circle
-        cv2.line(frame, frame_center, (x, y), (0, 255, 0), thickness=3, lineType=8)
+        # Draw a tiny circle (point) at the center of the frame
+        cv2.circle(frame, frame_center, 3, (255, 0, 0), 4)
 
-        # Calculate the Euclidian distance between both centers and display on frame
-        distance  = math.sqrt((frame_center[0]-x)**2 + (frame_center[1]-y)**2)
-        text = "Distance: " + str(distance)
-        cv2.putText(frame, text, (20, 550), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 100, 255), 2)
+        # Draw lines from center of the frame to center of the circle (in 2D)
+        cv2.line(frame, frame_center, (x, frame_center[1]), (0, 0, 255), thickness=3, lineType=8)
+        cv2.line(frame, (x, frame_center[1]), (x, y), (0, 0, 255), thickness=3, lineType=8)
 
-        # Calculate the distances in the x and y direction
+        # Calculate the distances in the x and y direction and display these on the frame
         delta_x = frame_center[0] - x
         delta_y = frame_center[1] - y
+        text1 = "x_distance: " + str(delta_x)
+        text2 = "y_distance: " + str(delta_y)
+        cv2.putText(frame, text1, (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        cv2.putText(frame, text2, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
     
     return frame, delta_x, delta_y
