@@ -14,6 +14,7 @@ goal = int(input("Untill which page do you want to study?:\t "))
 print("\nPress the 's' key at any time to pause the program")
 
 paused = False
+quit = False
 
 def update_progress(progress, elapsed_time):
     if progress > 1:
@@ -32,12 +33,14 @@ def update_progress(progress, elapsed_time):
 
 def pause_handler():
     global paused
+    global quit
     while True:
         time.sleep(0.5)
         if keyboard.is_pressed('s'):
             paused = True
-            input("\n \nPaused, press enter to continue ")
-            print()
+            user_input = str(input("\n \nPaused, press Enter to continue \nType 'quit' + Enter to stop \n"))
+            if "quit" in user_input:
+                quit = True
             paused = False
 
 def studyclock(minutes_per_page, page_started, goal):
@@ -48,7 +51,7 @@ def studyclock(minutes_per_page, page_started, goal):
     seconds = int(minutes_per_page*60)
     print("\n######################### START ################################\n")
     print("\n==> You should be at page ", current_page, "now.\n")
-    while current_page != goal:
+    while (current_page != goal + 1) and not quit:
         start = time.time()
         time.perf_counter()
         elapsed = 0
@@ -60,15 +63,18 @@ def studyclock(minutes_per_page, page_started, goal):
             start += pauze_duration
             elapsed = time.time() - start
             update_progress(elapsed/seconds, elapsed)
+            if quit:
+                break
             time.sleep(0.5)
         current_page += 1
-        playsound('Bell_sound.mp3')
-        if current_page != goal:
-            for _ in range(0,5):
-                print(".")
-                time.sleep(1)
-            print("\n==> You should be at page ", current_page, "now.\n")
+        if not quit: 
+            playsound('Bell_sound.mp3')
+            if (current_page != goal + 1):
+                for _ in range(0,5):
+                    print(".")
+                    time.sleep(1)
+                print("\n==> You should be at page ", current_page, "now.\n")
 
-    print("\n\n########## STUDY SESSION FINISHED, CONGRATULATIONS! ############\n")
+    print("\n\n################ STUDY SESSION FINISHED ###################\n")
 
 studyclock(minutes, page, goal)
