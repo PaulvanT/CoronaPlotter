@@ -44,17 +44,25 @@ def pause_handler():
                 quit = True
             paused = False
 
+def remaining_time(minutes_per_page, current_page, goal):
+    amount_of_pages = (goal + 1) - current_page
+    study_time_remaining = minutes_per_page*amount_of_pages*60
+    hours = study_time_remaining//(60*60)
+    minutes = (study_time_remaining-hours*60*60)//60
+    seconds = study_time_remaining - hours*60*60 - minutes*60
+    return str(int(hours)) + "h " + str(int(minutes)) + "m " + str(int(seconds)) + "s"
+
+
 def studyclock(inputs):
     global paused
     global quit
     minutes_per_page = inputs[0]
     page_started = inputs[1]
     goal = inputs[2]
-    current_page = int(page_started)
+    current_page = page_started
     seconds = int(minutes_per_page*60)
     print("\n######################### START ################################\n")
-    print("\n==> You should be at page ", current_page, "now.\n")
-
+    print("\n==> You should be at page ", current_page, "now. Time remaining: ", remaining_time(minutes_per_page, current_page, goal),"\n")
     # Main loop
     while (current_page != goal + 1) and not quit:
         start = time.time()
@@ -75,10 +83,10 @@ def studyclock(inputs):
         if not quit: 
             playsound('Bell_sound.mp3')
             if (current_page != goal + 1):
-                for _ in range(0,5):
+                for _ in range(0,4):
                     print(".")
-                    time.sleep(1)
-                print("\n==> You should be at page ", current_page, "now.\n")
+                    time.sleep(0.5)
+                print("\n==> You should be at page ", current_page, "now. Time remaining: ", remaining_time(minutes_per_page, current_page, goal),"\n")
 
     print("\n\n################ STUDY SESSION FINISHED ###################\n")
 
