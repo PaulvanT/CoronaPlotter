@@ -2,19 +2,20 @@
 import time, sys, keyboard, threading
 from playsound import playsound
 
-
-print("\n################################################################")
-print(  "##################### NEW STUDY SESSION ########################")
-print(  "################################################################")
-print("\n")
-print("\n######################### SETUP ################################\n")
-minutes = float(input("How many minutes do you want to allow per page?: "))
-page = int(input("At what page will you start studying?:\t\t "))
-goal = int(input("Untill which page do you want to study?:\t "))
-print("\nPress the 's' key at any time to pause the program")
-
 paused = False
 quit = False
+
+def initialise():
+    print("\n################################################################")
+    print(  "##################### NEW STUDY SESSION ########################")
+    print(  "################################################################")
+    print("\n")
+    print("\n######################### SETUP ################################\n")
+    minutes = float(input("How many minutes do you want to allow per page?: "))
+    page = int(input("At what page will you start studying?:\t\t "))
+    goal = int(input("Untill which page do you want to study?:\t "))
+    print("\nPress the 's' key at any time to pause the program")
+    return [minutes, page, goal]
 
 def update_progress(progress, elapsed_time):
     if progress > 1:
@@ -43,14 +44,18 @@ def pause_handler():
                 quit = True
             paused = False
 
-def studyclock(minutes_per_page, page_started, goal):
-    pauser = threading.Thread(target=pause_handler)
-    pauser.daemon = True
-    pauser.start()
+def studyclock(inputs):
+    global paused
+    global quit
+    minutes_per_page = inputs[0]
+    page_started = inputs[1]
+    goal = inputs[2]
     current_page = int(page_started)
     seconds = int(minutes_per_page*60)
     print("\n######################### START ################################\n")
     print("\n==> You should be at page ", current_page, "now.\n")
+
+    # Main loop
     while (current_page != goal + 1) and not quit:
         start = time.time()
         time.perf_counter()
@@ -77,4 +82,17 @@ def studyclock(minutes_per_page, page_started, goal):
 
     print("\n\n################ STUDY SESSION FINISHED ###################\n")
 
-studyclock(minutes, page, goal)
+    # Restart a session
+    restart =  input("Do you want to restart a session? (y/n): ")
+    if "y" in restart:
+        quit = False
+        studyclock(initialise())
+
+def main():
+    pauser = threading.Thread(target=pause_handler)
+    pauser.daemon = True
+    pauser.start()
+    studyclock(initialise())
+
+if __name__ == "__main__":
+    main()
